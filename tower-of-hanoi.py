@@ -22,7 +22,7 @@ while True:
     except ValueError:
         print("Invalid input. Please enter an integer.")
 
-print(f"\nSolving Tower of Hanoi for {num_disks} disks using towers A, B, C:")
+print(f"\nSolving Tower of Hanoi for {num_disks} disks using towers A, B, C\nA-Source\nB-Auxiliary\nC-Destination")
 
 if num_disks > 0:
     total_moves = tower_of_hanoi(num_disks, 'A', 'C', 'B')
