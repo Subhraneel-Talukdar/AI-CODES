@@ -1,30 +1,31 @@
-# Recursive function to solve the Tower of Hanoi puzzle
-def tower_of_hanoi(n, from_rod, to_rod, aux_rod, move_count=0):
+def tower_of_hanoi(n, source, destination, auxiliary):
     if n == 0:
-        return move_count
-      
-    if n == 1:
-        print(f"Move disk 1 from {from_rod} to {to_rod}")
-        return move_count + 1
-      
-    move_count = tower_of_hanoi(n - 1, from_rod, aux_rod, to_rod, move_count)
+        return 0
+    moves = 0
+    # Move n-1 disks from source to auxiliary, using destination as auxiliary
+    moves += tower_of_hanoi(n - 1, source, auxiliary, destination)
+    # Move the nth disk from source to destination
+    print(f"Move disk {n} from {source} to {destination}")
+    moves += 1
+    # Move the n-1 disks from auxiliary to destination, using source as auxiliary
+    moves += tower_of_hanoi(n - 1, auxiliary, destination, source)
+    return moves
 
-    print(f"Move disk {n} from {from_rod} to {to_rod}")
-    move_count += 1 
 
-    return tower_of_hanoi(n - 1, aux_rod, to_rod, from_rod, move_count)
-  
-num_disks = int(input("Enter the number of disks: "))
+while True:
+    try:
+        num_disks = int(input("Enter the number of disks (non-negative integer): "))
+        if num_disks >= 0:
+            break
+        else:
+            print("Number of disks cannot be negative.")
+    except ValueError:
+        print("Invalid input. Please enter an integer.")
 
-num_towers = int(input("Enter the number of towers (minimum 3): "))
-if num_towers < 3:
-    print("The number of towers must be at least 3 for the standard algorithm.")
-    exit() 
-  
-towers = [chr(65 + i) for i in range(num_towers)]
+print(f"\nSolving Tower of Hanoi for {num_disks} disks using towers A, B, C:")
 
-print(f"\nSolving Tower of Hanoi for {num_disks} disks using towers {towers[0]}, {towers[1]}, {towers[2]}:")
-
-total_moves = tower_of_hanoi(num_disks, towers[0], towers[2], towers[1])
-
-print(f"\nTotal number of moves: {total_moves}")
+if num_disks > 0:
+    total_moves = tower_of_hanoi(num_disks, 'A', 'C', 'B')
+    print(f"\nTotal number of moves: {total_moves}")
+else:
+    print("\nTotal number of moves: 0")
