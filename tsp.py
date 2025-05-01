@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import random
 
 POP_SIZE = 50
@@ -27,7 +25,7 @@ def route_distance(route, dist_matrix):
 
 
 def create_route(n, start):
-    cities = list(range(n)
+    cities = list(range(n))
     cities.remove(start)
     random.shuffle(cities)
     route = [start] + cities
@@ -100,4 +98,3 @@ best_route, best_dist = solve_tsp(dist_matrix, start)
 
 print(f"\nBest Route: {best_route}")
 print(f"Best Distance: {best_dist}")
->>>>>>> 32b2e890a0ffa53288ed9a68ca20605fb199c7f2
